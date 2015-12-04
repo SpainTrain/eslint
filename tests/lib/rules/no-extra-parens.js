@@ -291,6 +291,9 @@ ruleTester.run("no-extra-parens", rule, {
         invalid("bar ? baz : (class{}).foo();", "ClassExpression", null, {ecmaFeatures: {classes: true}}),
         invalid("bar((class{}).foo(), 0);", "ClassExpression", null, {ecmaFeatures: {classes: true}}),
         invalid("bar[(class{}).foo()];", "ClassExpression", null, {ecmaFeatures: {classes: true}}),
-        invalid("var bar = (class{}).foo();", "ClassExpression", null, {ecmaFeatures: {classes: true}})
+        invalid("var bar = (class{}).foo();", "ClassExpression", null, {ecmaFeatures: {classes: true}}),
+
+        // https://github.com/eslint/eslint/issues/4608
+        invalid("function *test() { yield (1); }", "Literal", null, {ecmaFeatures: {generators: true}})
     ]
 });
